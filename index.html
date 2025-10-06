@@ -7,12 +7,90 @@
         body, html {
             background-color: #37353E;
         }
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+        .inputs {
+            width: 25vw;
+            height: 4vh;
+            background-color: #44444E;
+            border: none;
+            outline: none;
+            color: #D3DAD9;
+            border-radius: 1vh;
+            font: 2vh "Segoe UI";
+            margin-bottom: 1vh;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            font-weight: 700;
+        }
+        .buttons {
+            width: 10vw;
+            height:4vh;
+            background-color: #715A5A;
+            border: none;
+            outline: none;
+            color: #D3DAD9;
+            border-radius: 1vh;
+            font: 2vh "Segoe UI";
+            margin-bottom: 1vh;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
-
+    <div id="main-container">
+        <input class="inputs" type="text" id="name" placeholder="Name"/>
+        <input class="inputs" type="password" id="password" placeholder="Password"/>
+        <button class="buttons" id="button-login">Login</button>
+        <button class="buttons" id="button-sign-up">Sign Up</button>
+    </div>
 
 <script>
+    //front end template - made my NOAH RICHARDS
+
+    const BaseWorkerLink = "https://backend-worker.noahrich2028.workers.dev" //set to full base worker link, dont forget https://
+
+    const InputName = document.getElementById("name");
+    const InputPassword = document.getElementById("password");
+
+    async function SignUp() {
+        const res = await fetch(BaseWorkerLink + "/sign-up", {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"name":InputName.value.toString().toLowerCase(), "password":InputPassword.value.toString().toLowerCase()})
+        });
+        if (!res.ok){
+            alert("error, server didnt respond");
+        }
+        const text = await res.text();
+        if (res.status === 201) {
+            await LogIn()
+        }
+    }
+
+    async function LogIn() {
+        const res = await fetch(BaseWorkerLink + "/login", {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"name":InputName.value.toString().toLowerCase(), "password":InputPassword.value.toString().toLowerCase()})
+        })
+        if (!res.ok){
+            alert("error, server didnt respond");
+        }
+        let text = await res.json();
+        if (!text.token) {
+            alert("Login failed: wrong name or password");
+            return;
+        }
+        localStorage.setItem("token", text.token)
+        window.location.href = "homepage.html";
+    }
+
 
 </script>
 </body>
