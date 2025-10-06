@@ -2,58 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Homepage</title>
     <style>
         body, html {
-            background-color: #37353E;
+            background: #37353E;
         }
         #main-container {
+            display: grid;
+            grid-template-areas:
+            "main-text-cont DMs";
+            grid-template-columns: 1fr 20vw;
+        }
+        #main-text-cont {
             display: flex;
             flex-direction: column;
+            grid-area: main-text-cont;
+            border: 1px solid white;
+            height: 98vh;
             align-items: center;
-            justify-content: center;
-            height: 80vh;
         }
-        .inputs {
-            width: 25vw;
-            height: 4vh;
-            background-color: #44444E;
+        #DMs-container {
+            display: flex;
+            flex-direction: column;
+            grid-area: DMs;
+            border: 1px solid white;
+            height: 98vh;
+            align-items: center;
+        }
+        #Label-DM {
+            color: #D3DAD9;
+            font: 4vh "Segoe UI";
+            font-weight: 700;
+            margin: 1vh;
+        }
+        #main-title {
+            color: #D3DAD9;
+            font: 4vh "Segoe UI";
+            font-weight: 700;
+            margin: 1vh;
+        }
+        #input-send-box {
+            background: #44444E;
+            width: 40vw;
+            height: 5vh;
+            position: absolute;
+            bottom: 3vh;
+            border-radius: 100px;
+        }
+        #input-message {
+            position: absolute;
+            width: 35vw;
+            height: 3.5vh;
+            top: .5vh;
+            background: none;
             border: none;
             outline: none;
-            color: #D3DAD9;
-            border-radius: 1vh;
+            left: .5vw;
             font: 2vh "Segoe UI";
-            margin-bottom: 1vh;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             font-weight: 700;
+            color: #D3DAD9;
         }
-        .buttons {
-            width: 10vw;
-            height:4vh;
-            background-color: #715A5A;
+        #button-send {
+            background: none;
             border: none;
-            outline: none;
-            color: #D3DAD9;
-            border-radius: 1vh;
-            font: 2vh "Segoe UI";
-            margin-bottom: 1vh;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            font-weight: 700;
         }
-        .buttons:hover {
-            opacity: 70%;
+        #icon {
+            width: 1.5vw;
+            position: absolute;
+            top: 1vh;
+            right: .6vw;
+        }
+        #button-send:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <div id="main-container">
-        <input class="inputs" type="text" id="name" placeholder="Name"/>
-        <input class="inputs" type="text" id="password" placeholder="Password"/>
-        <button class="buttons" id="button-login">Login</button>
-        <button class="buttons" id="button-sign-up">Sign Up</button>
+<div id="main-container">
+    <div id="main-text-cont">
+        <h1 id="main-title">Global Chat</h1>
+        <div id="input-send-box">
+            <input type="text" id="input-message"/>
+            <button id="button-send"><img id="icon" src="output-onlinepngtools.png"> </button>
+        </div>
     </div>
+    <div id="DMs-container">
+        <p id="Label-DM">DMs</p>
+    </div>
+</div>
 
 <script>
+
 </script>
 </body>
 </html>
