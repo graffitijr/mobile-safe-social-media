@@ -71,7 +71,7 @@
             alert("error, server didnt respond");
         }
         const text = await res.text();
-        if (res.status === 201) {
+        if (text === "account created") {
             await LogIn()
         }
     }
